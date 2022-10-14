@@ -28,3 +28,8 @@ public:
         return head;
     }
 };
+
+/**
+ * Explanation:
+ * https://www.youtube.com/watch?v=3P-b3X8T_k8&ab_channel=CodeFreaks
+ */
