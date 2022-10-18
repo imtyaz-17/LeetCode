@@ -13,8 +13,11 @@ public:
             counter++;
             
             if(i==len-1 || s[i]!=s[i+1]){
-               // char count= '0'+ counter; //int to char 
-                ans= ans+to_string(counter)+s[i];
+               // char count= '0'+ counter; //int to char
+                string count =to_string(counter);
+                ans= ans+count;
+                // ans= ans+to_string(counter)+s[i]; //int to char 
+                ans= ans+s[i]; 
                 counter=0;
             }
         }
