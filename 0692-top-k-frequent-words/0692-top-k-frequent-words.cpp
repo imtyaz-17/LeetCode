@@ -1,29 +1,31 @@
 class Solution {
 public:
     
+    bool static compare(pair<int,string>p1, pair<int,string>p2){
+        if(p1.first == p2.first)
+            return p1.second< p2.second;
+        
+        return p1.first> p2.first;  
+    }
     vector<string> topKFrequent(vector<string>& words, int k) {
         map<string, int> freq;
         
-         // use map to count the appearance of word
-        // then use bucket sort to get the top k frequent elements
-        map<string, int> map;
-        for(auto word: words)
-            map[word]++;
+        for(auto word:words)
+            freq[word]++;
         
-        vector<vector<string>> buckets(words.size());
-        for(auto it: map)
-            buckets[it.second].push_back(it.first);
-        
-        vector<string> res;
-        for(int i= buckets.size()-1; i>= 0 && k> 0; i--){
-            if(buckets[i].size() == 0) continue;
-            //have element in the bucket, find out how many we need to get
-            //because we need to follow alphabetical order
-            int n= min(k, (int)buckets[i].size());
-            res.insert(res.end(), buckets[i].begin(), buckets[i].begin()+n);
-            k-=n;
+        vector<pair<int,string>> vecp;
+        for(auto key: freq){
+            vecp.push_back({key.second, key.first});
         }
-        return res;
+        
+        sort(vecp.begin(), vecp.end(),compare);
+        
+        vector<string> ans;
+        for(int i =0;i<k;i++){
+            ans.push_back(vecp[i].second);
+        }
+        
+        return ans;
     }
 };
 
