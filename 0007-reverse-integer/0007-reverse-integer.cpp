@@ -11,13 +11,10 @@ class Solution
                 reverse_int = reverse_int *10 + last_digit;
                 x = x / 10;
             }
-           	// if (reverse_int > 0x7FFFFFFF || reverse_int < -0x7FFFFFFF){
-           	//     return 0;
-           	// }
-            if (reverse_int < INT_MIN || reverse_int > INT_MAX)
-            {
-                return 0;
-            }
+           	if (reverse_int > 0x7FFFFFFF || reverse_int < -0x7FFFFFFF){
+           	    return 0;
+           	}
+            
             return (int) reverse_int;
         }
 };
