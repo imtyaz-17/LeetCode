@@ -14,39 +14,39 @@ class Solution
     {
         // code here 
        
-        int r=matrix.size();
-         int c = matrix[0].size();
+        int row=matrix.size();
+         int col = matrix[0].size();
         
-        bool rowFlg=false,colFlg=false;
-        int i,j;
+        bool arr_row[row]; fill(arr_row, arr_row+row, false);
+        bool arr_col[col]; fill(arr_col, arr_col+col, false);
         
-        for(i=0;i<r;i++){
-            for(j=0;j<c;j++){
-                if(i==0 && matrix[i][j]==1) rowFlg =true;
-                if(j==0 && matrix[i][j]==1) colFlg =true;
-                
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
                 if(matrix[i][j]==1){
-                    matrix[0][j]=1;
-                    matrix[i][0]=1;
+                    arr_row[i] =true;
+                    arr_col[j]=true;
                 }
             }
         }
         
-        for(i=1;i<r;i++){
-            for(j=1;j<c;j++){
-                if(matrix[0][j]==1 || matrix[i][0]==1) matrix[i][j]=1;
+        for(int i=0;i<row;i++){
+            if(arr_row[i]){
+                for(int j=0;j<col;j++){
+                    matrix[i][j]=1;
+                }
             }
         }
-        
-        if(rowFlg ==true){
-            for(i=0;i<c;i++) matrix[0][i]=1;
+        for(int i=0;i<col;i++){
+            if(arr_col[i]){
+                for(int j=0;j<row;j++){
+                    matrix[j][i]=1;
+                }
+            }
         }
-        if(colFlg ==true){
-            for(i=0;i<r;i++) matrix[i][0]=1;
-        }
-        
     }
 };
+// **
+// https://youtu.be/TBTNZXzwpP8
 
 
 //{ Driver Code Starts.
