@@ -12,36 +12,63 @@ class Solution
     public:
        	//#1 - T.C -> o(n)+o(n)+o(n) = o(n)
 
-        bool findPath(TreeNode *root, vector<TreeNode*> &path, TreeNode *n)
-        {
-            if (root == NULL)
-                return false;
-            path.push_back(root);
-            if (root == n) return true;
+       	//         bool findPath(TreeNode *root, vector<TreeNode*> &path, TreeNode *n)
+       	//         {
+       	//             if (root == NULL)
+       	//                 return false;
+       	//             path.push_back(root);
+       	//             if (root == n) return true;
 
-            if (findPath(root->left, path, n) || findPath(root->right, path, n))
+       	//             if (findPath(root->left, path, n) || findPath(root->right, path, n))
+       	//             {
+       	//                 return true;
+       	//             }
+       	//             path.pop_back();
+       	//             return false;
+       	//         }
+       	//     TreeNode* lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+       	//     {
+       	//         vector<TreeNode*> path1, path2;
+
+       	//         if (!findPath(root, path1, p) || !findPath(root, path2, q))
+       	//         {
+       	//             return NULL;
+       	//         }
+
+       	//         TreeNode *ans = NULL;
+
+       	//         for (int i = 0; i < path1.size() && i < path2.size(); i++)
+       	//         {
+       	//             if (path1[i] == path2[i])
+       	//                 ans = path2[i];
+       	//         }
+       	//         return ans;
+       	//     }
+
+       	//#2 - Efficient
+
+        TreeNode* lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+        {
+            if (root == NULL) return NULL;
+
+            if (root == p || root == q)
+                return root;
+
+            TreeNode *LCA_left = lowestCommonAncestor(root->left, p, q);
+            TreeNode *LCA_right = lowestCommonAncestor(root->right, p, q);
+
+            if (LCA_left != NULL && LCA_right != NULL)
             {
-                return true;
+                return root;
             }
-            path.pop_back();
-            return false;
-        }
-    TreeNode* lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
-    {
-        vector<TreeNode*> path1, path2;
 
-        if (!findPath(root, path1, p) || !findPath(root, path2, q))
-        {
-            return NULL;
+            if (LCA_left != NULL)
+            {
+                return LCA_left;
+            }
+            else
+            {
+                return LCA_right;
+            }
         }
-
-        TreeNode *ans = NULL;
-
-        for (int i = 0; i < path1.size() && i < path2.size(); i++)
-        {
-            if (path1[i] == path2[i])
-                ans = path2[i];
-        }
-        return ans;
-    }
 };
